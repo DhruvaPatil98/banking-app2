@@ -93,7 +93,7 @@ class AccountSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Enter pin (Pin must only contain numbers) ")
 
         else:
-            if int(len(str(pin))) <= 4:
+            if int(len(str(pin))) <= 3:
                 raise serializers.ValidationError("Pin length must be minimum 4 digits")
 
         return pin
