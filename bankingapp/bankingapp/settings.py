@@ -11,11 +11,15 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
+
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+dot_env_path = os.path.join(BASE_DIR, '.env')
+load_dotenv(dot_env_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -87,8 +91,8 @@ DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.postgresql',
     'NAME': 'bankingapp',
-    'USER': "postgres",
-    'PASSWORD': "8Rorono@Zoro8",
+    'USER': os.environ.get("DB_USER"),
+    'PASSWORD': os.environ.get("DB_PASS"),
     'HOST': 'db',
     'PORT': 5432,
     }
