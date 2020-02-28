@@ -1,8 +1,9 @@
 from rest_framework import serializers
-from apps.netbankingapp.models import Users, Account
+from apps.netbankingapp.models import Users, Account, AllTransactions
 from datetime import datetime
 from django.core.validators import RegexValidator
 import re
+from apps.netbankingapp.utils.utils import hash_password
 
 class UsersSerializer(serializers.ModelSerializer):
 
@@ -79,7 +80,8 @@ class UsersSerializer(serializers.ModelSerializer):
             elif not re.search("[_@$^&*!#]", password):
                 raise serializers.ValidationError(" password must contain atleast one special character ")
 
-        return password
+
+        return hash_password(password)
 
 class AccountSerializer(serializers.ModelSerializer):
 
@@ -97,3 +99,16 @@ class AccountSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError("Pin length must be minimum 4 digits")
 
         return pin
+
+class TransactionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = AllTransactions
+        fields = [
+            'time',
+            'account',
+            'receiveracc',
+            'withdrawstatus',
+            'depositstatus',
+            'transferedMoney'
+        ]

@@ -27,7 +27,7 @@ class Users(models.Model):
     address = models.CharField(max_length=100)
 
     password = models.CharField(
-        max_length=30, unique=False, null=True, blank=True,
+        max_length=300, unique=False, null=True, blank=True,
         help_text=(
               'Required. 30 characters or fewer. Letters, digits and '
               'special characters'
@@ -59,7 +59,8 @@ class Account(models.Model):
     )
 
     #validating password to have special characters and upper and lower case letters and digits
-    pin = models.IntegerField(
+    pin = models.CharField(
+         max_length=300,
          unique=False, null=True, blank=True,
          help_text=(
               'Required. 6 digits or 4 digit number'
@@ -69,3 +70,24 @@ class Account(models.Model):
 
     def __str__(self):
         return str(self.account_no) + " balance: " + str(self.balance)
+
+
+class AllTransactions(models.Model):
+    time = models.DateTimeField(auto_now_add=True)
+
+    account = models.ForeignKey(
+            Account, on_delete=models.CASCADE, related_name="account"
+        )
+    receiveracc = models.ForeignKey(
+            Account, on_delete=models.CASCADE,
+            null=True, blank=True, related_name="receiversacc"
+        )
+    withdrawstatus = models.DecimalField(
+            decimal_places=2, max_digits=15, null=True, blank=True
+        )
+    depositstatus = models.DecimalField(
+            decimal_places=2, max_digits=15, null=True, blank=True
+        )
+    transferedMoney = models.DecimalField(
+            decimal_places=2, max_digits=15, null=True, blank=True
+        )
