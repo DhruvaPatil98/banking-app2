@@ -96,7 +96,7 @@ class TransactionHelper:
             "account": account.pk
         }
 
-        account.balance = F('balance') - money
+        account.balance = F('balance') + money
         account.save()
 
         serializedata = TransactionSerializer(data=data)

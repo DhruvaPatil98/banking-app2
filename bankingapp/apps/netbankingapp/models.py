@@ -60,10 +60,10 @@ class Account(models.Model):
 
     #validating password to have special characters and upper and lower case letters and digits
     pin = models.CharField(
-         max_length=300,
+         max_length=6,
          unique=False, null=True, blank=True,
          help_text=(
-              'Required. 6 digits or 4 digit number'
+              'Required. 6 digits'
           ))
 
     balance = models.DecimalField(decimal_places=2, max_digits=15)
