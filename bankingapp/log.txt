@@ -1,0 +1,3 @@
+OrderedDict([('account', <Account: 25601872 balance: 1000.00>), ('depositstatus', Decimal('1000.00'))])
+OrderedDict([('account', <Account: 25601872 balance: 7000.00>), ('depositstatus', Decimal('6000.00'))])
+OrderedDict([('account', <Account: 25601872 balance: 2001.00>), ('withdrawstatus', Decimal('4999.00'))])
